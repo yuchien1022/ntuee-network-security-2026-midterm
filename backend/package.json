@@ -4,8 +4,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "npx prisma migrate deploy && node src/index.js",
-    "dev": "npx prisma migrate deploy && npx nodemon src/index.js"
+    "start": "npx prisma db push && node src/index.js",
+    "dev": "npx prisma db push && npx nodemon src/index.js"
   },
   "dependencies": {
     "@prisma/client": "^5.7.0",
