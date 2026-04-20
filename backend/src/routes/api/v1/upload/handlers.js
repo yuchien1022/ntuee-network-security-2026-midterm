@@ -1,13 +1,10 @@
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+import path from "path";
 import crypto from "crypto";
 import fs from "fs";
 import multer from "multer";
 import { fileTypeFromFile } from "file-type";
 import { prisma } from "../../../../adapters.js";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-export const uploadsDir = path.join(__dirname, "../../../../../uploads");
+import { uploadsDir } from "../../../../config/paths.js";
 
 const ALLOWED_MIME_TYPES = ["image/jpeg", "image/png"];
 

@@ -5,14 +5,12 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import pg from "pg";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
+import path from "path";
 import { prisma } from "./adapters.js";
 import { csrfErrorHandler } from "./csrf.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 import rootRouter from "./routes/index.js";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { uploadsDir, frontendDistDir } from "./config/paths.js";
 if (!process.env.SESSION_SECRET) {
   console.error("FATAL: SESSION_SECRET environment variable is not set");
   process.exit(1);
@@ -23,7 +21,7 @@ const isProd = process.env.NODE_ENV === "production";
 const PgSessionStore = connectPgSimple(session);
 const pgPool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
-const uploadsDir = path.join(__dirname, "../uploads");
+// For durable avatar uploads on Render, mount a persistent disk to UPLOAD_DIR.
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 
 const app = express();
@@ -72,11 +70,10 @@ app.use(rootRouter);
 app.use(csrfErrorHandler);
 app.use(errorHandler);
 
-const frontendDir = path.join(__dirname, "../../frontend/dist");
-app.use(express.static(frontendDir));
+app.use(express.static(frontendDistDir));
 app.get("*", (req, res) => {
   if (!req.originalUrl.startsWith("/api")) {
-    return res.sendFile(path.join(frontendDir, "index.html"));
+    return res.sendFile(path.join(frontendDistDir, "index.html"));
   }
   return res.status(404).send();
 });
@@ -88,8 +85,11 @@ process.on("exit", async () => {
 
 async function bootstrap() {
   await prisma.$connect();
+  console.log(`[startup] env=${process.env.NODE_ENV || "development"}`);
+  console.log(`[startup] uploads_dir=${uploadsDir}`);
+  console.log(`[startup] frontend_dist=${frontendDistDir} exists=${fs.existsSync(frontendDistDir)}`);
   app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+    console.log(`Server listening on port ${port}`);
   });
 }
 
