@@ -24,7 +24,7 @@ function Avatar({ user }) {
 }
 
 function MessageItem({ msg, currentUserId, onUpdated, onDeleted, onDeleteError }) {
-  const isOwner = Boolean(currentUserId && msg.author?.username === currentUserId);
+  const isOwner = Boolean(currentUserId && msg.author?.id === currentUserId);
   const [editing, setEditing] = useState(false);
   const [editContent, setEditContent] = useState(msg.content);
   const [saving, setSaving] = useState(false);
@@ -60,7 +60,10 @@ function MessageItem({ msg, currentUserId, onUpdated, onDeleted, onDeleteError }
       <Avatar user={msg.author} />
       <div className="msg-body">
         <div className="msg-meta">
-          <span className="msg-author">{msg.author?.username ?? "Unknown"}</span>
+          <span className="msg-author">
+            {msg.author?.username ?? "Unknown"}
+            {msg.author?.role === "owner" ? " (Owner)" : ""}
+          </span>
           {isOwner && !editing && (
             <div className="msg-actions">
               <button className="msg-action-btn" onClick={() => { setEditing(true); setEditContent(msg.content); }}>Edit</button>
@@ -201,7 +204,7 @@ export default function MessageBoard() {
                 <MessageItem
                   key={msg.id}
                   msg={msg}
-                  currentUserId={user?.username}
+                  currentUserId={user?.id}
                   onUpdated={handleUpdated}
                   onDeleted={handleDeleted}
                   onDeleteError={handleDeleteError}
