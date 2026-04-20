@@ -61,11 +61,6 @@ export default function RootLayout() {
                   Profile
                 </Link>
               </li>
-              <li>
-                <Link to="/ai-writing" className={path === "/ai-writing" ? "active" : ""}>
-                  AI Assistant
-                </Link>
-              </li>
               <li className="nav-user">
                 {user.avatarUrl ? (
                   <img src={`${import.meta.env.VITE_API_URL ?? ""}${user.avatarUrl}`} alt={user.username} className="nav-avatar" />
