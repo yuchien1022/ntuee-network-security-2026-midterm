@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import MessageBoard from "./pages/MessageBoard";
 import Profile from "./pages/Profile";
+import AIWork from "./pages/AIWork";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
 
@@ -23,6 +24,7 @@ const router = createHashRouter([
       { path: "login", element: <Login /> },
       { path: "messages", element: <MessageBoard /> },
       { path: "profile", element: <ProtectedRoute><Profile /></ProtectedRoute> },
+      { path: "ai-work", element: <AIWork /> },
     ],
   },
 ]);

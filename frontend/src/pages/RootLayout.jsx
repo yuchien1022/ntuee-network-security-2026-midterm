@@ -45,6 +45,11 @@ export default function RootLayout() {
             </Link>
           </li>
           <li>
+            <Link to="/ai-work" className={path === "/ai-work" ? "active" : ""}>
+              AI Work
+            </Link>
+          </li>
+          <li>
             <Link to="/messages" className={path === "/messages" ? "active" : ""}>
               Messages
             </Link>
