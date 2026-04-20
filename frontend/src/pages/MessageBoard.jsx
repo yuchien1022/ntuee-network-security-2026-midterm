@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import services from "../services";
 
 const API_BASE = import.meta.env.VITE_API_URL ?? "";
+const MAX_MESSAGE_LENGTH = 1000;
 
 function Avatar({ user }) {
   if (user?.avatarUrl) {
@@ -32,6 +33,10 @@ function MessageItem({ msg, currentUserId, onUpdated, onDeleted, onDeleteError }
 
   async function handleSave() {
     if (!editContent.trim()) return;
+    if (editContent.length > MAX_MESSAGE_LENGTH) {
+      setEditError(`Message cannot exceed ${MAX_MESSAGE_LENGTH} characters.`);
+      return;
+    }
     setSaving(true);
     setEditError("");
     try {
@@ -76,8 +81,13 @@ function MessageItem({ msg, currentUserId, onUpdated, onDeleted, onDeleteError }
             <textarea
               className="msg-textarea"
               value={editContent}
-              onChange={(e) => setEditContent(e.target.value)}
-              maxLength={1000}
+              onChange={(e) => {
+                const nextValue = e.target.value;
+                setEditContent(nextValue);
+                if (editError && nextValue.length <= MAX_MESSAGE_LENGTH) {
+                  setEditError("");
+                }
+              }}
               rows={3}
             />
             {editError && <div className="form-message error">{editError}</div>}
@@ -126,6 +136,10 @@ export default function MessageBoard() {
   async function handlePost(e) {
     e.preventDefault();
     if (!content.trim()) return;
+    if (content.length > MAX_MESSAGE_LENGTH) {
+      setError(`Message cannot exceed ${MAX_MESSAGE_LENGTH} characters.`);
+      return;
+    }
     setPosting(true);
     setError("");
     try {
@@ -164,8 +178,13 @@ export default function MessageBoard() {
                 className="msg-textarea"
                 placeholder="Leave a message…"
                 value={content}
-                onChange={(e) => setContent(e.target.value)}
-                maxLength={1000}
+                onChange={(e) => {
+                  const nextValue = e.target.value;
+                  setContent(nextValue);
+                  if (error && nextValue.length <= MAX_MESSAGE_LENGTH) {
+                    setError("");
+                  }
+                }}
                 rows={3}
               />
               {error && <div className="form-message error">{error}</div>}
@@ -177,7 +196,7 @@ export default function MessageBoard() {
                 >
                   {posting ? "Posting…" : "Post"}
                 </button>
-                <span className="char-count">{content.length} / 1000</span>
+                <span className="char-count">{content.length} / {MAX_MESSAGE_LENGTH}</span>
               </div>
             </form>
           ) : (
