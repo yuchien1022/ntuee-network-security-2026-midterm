@@ -13,6 +13,11 @@ const MESSAGE_RESPONSE_FIELDS = {
   author: { select: MESSAGE_AUTHOR_FIELDS },
 };
 
+function parseMessageId(rawId) {
+  if (!/^\d+$/.test(rawId)) return null;
+  return Number(rawId);
+}
+
 export async function getMessages(req, res) {
   const messages = await prisma.message.findMany({
     orderBy: { createdAt: "desc" },
@@ -22,8 +27,8 @@ export async function getMessages(req, res) {
 }
 
 export async function updateMessage(req, res) {
-  const id = parseInt(req.params.id);
-  if (isNaN(id)) return res.status(400).json({ error: "Invalid message id" });
+  const id = parseMessageId(req.params.id);
+  if (id === null) return res.status(400).json({ error: "Invalid message id" });
 
   const { content } = req.body;
   if (!content || typeof content !== "string" || content.trim().length === 0) {
@@ -46,8 +51,8 @@ export async function updateMessage(req, res) {
 }
 
 export async function deleteMessage(req, res) {
-  const id = parseInt(req.params.id);
-  if (isNaN(id)) return res.status(400).json({ error: "Invalid message id" });
+  const id = parseMessageId(req.params.id);
+  if (id === null) return res.status(400).json({ error: "Invalid message id" });
 
   const existing = await prisma.message.findUnique({ where: { id } });
   if (!existing) return res.status(404).json({ error: "Message not found" });
