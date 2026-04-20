@@ -9,8 +9,4 @@ export const user = {
     const { data } = await api.get(`/users/${id}`);
     return data;
   },
-  async createOne({ name }) {
-    const { data } = await api.post("/users", { name });
-    return data;
-  },
 };

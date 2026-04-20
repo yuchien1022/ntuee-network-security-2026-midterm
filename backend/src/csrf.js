@@ -1,6 +1,7 @@
 import { doubleCsrf } from "csrf-csrf";
 
 const isProd = process.env.NODE_ENV === "production";
+export const csrfCookieName = isProd ? "__Host-csrf" : "csrf";
 
 export const {
   invalidCsrfTokenError,
@@ -9,7 +10,7 @@ export const {
   doubleCsrfProtection,
 } = doubleCsrf({
   getSecret: (req) => req.session.id,
-  cookieName: isProd ? "__Host-csrf" : "csrf",
+  cookieName: csrfCookieName,
   cookieOptions: {
     httpOnly: true,
     sameSite: isProd ? "strict" : "lax",
@@ -22,9 +23,9 @@ export const {
 });
 
 export function csrfErrorHandler(error, req, res, next) {
-  if (error == invalidCsrfTokenError) {
+  if (error === invalidCsrfTokenError || error?.code === "EBADCSRFTOKEN") {
     res.status(403).json({ error: "invalid csrf token" });
   } else {
-    next();
+    next(error);
   }
 }

@@ -490,6 +490,302 @@ footer p {
   transform: translateY(0);
 }
 
+/* ===== Owner Profile Photo ===== */
+.owner-photo-wrapper {
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.1s;
+}
+
+.owner-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--border);
+}
+
+/* ===== Auth Nav ===== */
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.nav-avatar-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--border);
+  font-family: "DM Serif Display", serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.nav-username {
+  font-size: 0.85rem;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  padding: 0;
+  font-family: "DM Sans", sans-serif;
+}
+
+.btn-link:hover {
+  color: var(--text);
+}
+
+/* ===== Auth Forms ===== */
+.auth-switch {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.auth-switch a {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.file-input {
+  width: 100%;
+  font-size: 0.9rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.avatar-preview-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.avatar-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+}
+
+.auth-notice {
+  margin-bottom: 2rem;
+  padding: 1rem 1.4rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.auth-notice a {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+/* ===== User Avatar Image ===== */
+.user-avatar-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+/* ===== Message Board ===== */
+.msg-form {
+  margin-bottom: 3rem;
+}
+
+.msg-textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.3s;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+}
+
+.msg-textarea:focus {
+  border-color: var(--text);
+}
+
+.char-count {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+.msg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.msg-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.msg-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "DM Serif Display", serif;
+  font-size: 1.1rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.msg-avatar-img {
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.msg-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.msg-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.msg-author {
+  font-family: "DM Serif Display", serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.msg-time {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.msg-content {
+  font-size: 0.95rem;
+  color: var(--muted);
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* ===== Message actions (edit/delete) ===== */
+.msg-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.msg-action-btn {
+  background: none;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.msg-action-btn:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.msg-action-delete:hover {
+  color: #e05c5c;
+}
+
+.msg-edit-form {
+  margin-top: 0.5rem;
+}
+
+/* ===== Profile page ===== */
+.profile-card {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin: 1.5rem 0;
+}
+
+.profile-avatar-wrapper {
+  flex-shrink: 0;
+}
+
+.profile-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-avatar-placeholder {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.profile-info p {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.profile-info strong {
+  color: var(--text);
+}
+
+/* ===== Form message variants ===== */
+.form-message.success {
+  color: #5cb85c;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 640px) {
   nav {

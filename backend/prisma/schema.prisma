@@ -8,7 +8,28 @@ datasource db {
 }
 
 model User {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  email        String    @unique
+  passwordHash String
+  avatarUrl    String?
+  createdAt    DateTime  @default(now())
+  messages     Message[]
+}
+
+model Message {
   id        Int      @id @default(autoincrement())
-  name      String
+  content   String
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
+}
+
+model Session {
+  sid    String   @id @db.VarChar
+  sess   Json     @db.Json
+  expire DateTime @db.Timestamp(6)
+
+  @@index([expire], map: "IDX_session_expire")
+  @@map("session")
 }

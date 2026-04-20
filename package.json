@@ -2,6 +2,10 @@
   "scripts": {
     "start": "cd backend && npm start",
     "build": "cd frontend && npm run build",
-    "install:all": "cd frontend && npm install && cd ../backend && npm install"
+    "install:all": "cd frontend && npm install && cd ../backend && npm install",
+    "ui:verify": "node scripts/verify-ui.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0"
   }
 }
