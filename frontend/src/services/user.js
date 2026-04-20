@@ -1,6 +1,10 @@
 import api from "./axiosClient";
 
 export const user = {
+  async getOwner() {
+    const { data } = await api.get("/users/owner");
+    return data;
+  },
   async getAll() {
     const { data } = await api.get("/users");
     return data;

@@ -1,9 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import FadeIn from "../components/FadeIn";
+import services from "../services";
 
 export default function About() {
+  const [ownerName, setOwnerName] = useState("the site owner");
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    services.user
+      .getOwner()
+      .then((owner) => setOwnerName(owner.username))
+      .catch(() => setOwnerName("the site owner"));
   }, []);
 
   return (
@@ -14,7 +21,7 @@ export default function About() {
           <h2>About Me</h2>
           <div className="about-content">
             <p>
-              Hey there! I'm Yu Chien Hsiao, from Taoyuan, Taiwan. I'm currently
+              Hey there! I'm {ownerName}, from Taoyuan, Taiwan. I'm currently
               pursuing my master's degree in cybersecurity in the Department of
               Electrical Engineering at National Taiwan University. Outside of
               school, I'm a big fan of K-pop, especially Taeyeon from Girls'

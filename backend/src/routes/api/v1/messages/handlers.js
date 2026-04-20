@@ -1,7 +1,9 @@
 import { prisma } from "../../../../adapters.js";
 
 const MESSAGE_AUTHOR_FIELDS = {
+  id: true,
   username: true,
+  role: true,
   avatarUrl: true,
 };
 

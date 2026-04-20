@@ -1,9 +1,20 @@
 import { prisma } from "../../../../adapters.js";
 
 const PUBLIC_USER_FIELDS = {
+  id: true,
   username: true,
+  role: true,
   avatarUrl: true,
 };
+
+export async function getOwnerUser(req, res) {
+  const owner = await prisma.user.findFirst({
+    where: { role: "owner" },
+    select: PUBLIC_USER_FIELDS,
+  });
+  if (!owner) return res.status(404).json({ error: "Owner not found" });
+  return res.json(owner);
+}
 
 export async function getAllUsers(req, res) {
   const allUsers = await prisma.user.findMany({

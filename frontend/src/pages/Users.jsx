@@ -55,7 +55,9 @@ export default function Users() {
                   )}
                   <div className="user-info">
                     <div className="user-name">{u.username}</div>
-                    <div className="user-meta">Registered visitor</div>
+                    <div className="user-meta">
+                      {u.role === "owner" ? "Site owner" : "Registered visitor"}
+                    </div>
                   </div>
                 </div>
               ))}

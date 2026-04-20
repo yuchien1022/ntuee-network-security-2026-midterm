@@ -72,7 +72,7 @@ export async function uploadAvatar(req, res) {
     const user = await prisma.user.update({
       where: { id: req.session.userId },
       data: { avatarUrl },
-      select: { id: true, username: true, email: true, avatarUrl: true, createdAt: true },
+      select: { id: true, username: true, email: true, role: true, avatarUrl: true, createdAt: true },
     });
 
     const previousAvatarPath = avatarPathFromUrl(previousUser?.avatarUrl);

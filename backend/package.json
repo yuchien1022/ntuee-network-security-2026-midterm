@@ -8,7 +8,8 @@
     "dev": "npx prisma generate && npx prisma migrate deploy && npx nodemon src/index.js",
     "db:generate": "npx prisma generate",
     "db:migrate": "npx prisma migrate dev",
-    "db:deploy": "npx prisma migrate deploy"
+    "db:deploy": "npx prisma migrate deploy",
+    "owner:set": "node scripts/set-owner.mjs"
   },
   "dependencies": {
     "@prisma/client": "^5.7.0",
