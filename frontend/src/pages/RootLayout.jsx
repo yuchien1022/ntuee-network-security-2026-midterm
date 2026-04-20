@@ -54,11 +54,7 @@ export default function RootLayout() {
               Messages
             </Link>
           </li>
-          <li>
-            <Link to="/ai-work" className={path === "/ai-work" ? "active" : ""}>
-              AI Work
-            </Link>
-          </li>
+
           {user ? (
             <>
               <li>
@@ -68,7 +64,11 @@ export default function RootLayout() {
               </li>
               <li className="nav-user">
                 {user.avatarUrl ? (
-                  <img src={`${import.meta.env.VITE_API_URL ?? ""}${user.avatarUrl}`} alt={user.username} className="nav-avatar" />
+                  <img
+                    src={`${import.meta.env.VITE_API_URL ?? ""}${user.avatarUrl}`}
+                    alt={user.username}
+                    className="nav-avatar"
+                  />
                 ) : (
                   <span className="nav-avatar nav-avatar-initials">
                     {user.username.charAt(0).toUpperCase()}
