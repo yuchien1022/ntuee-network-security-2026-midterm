@@ -5,8 +5,6 @@ import { AuthProvider } from "./context/AuthContext";
 import RootLayout from "./pages/RootLayout";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Users from "./pages/Users";
-import CreateUser from "./pages/CreateUser";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import MessageBoard from "./pages/MessageBoard";
@@ -21,8 +19,6 @@ const router = createHashRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
-      { path: "users", element: <Users /> },
-      { path: "users/create", element: <CreateUser /> },
       { path: "register", element: <Register /> },
       { path: "login", element: <Login /> },
       { path: "messages", element: <MessageBoard /> },

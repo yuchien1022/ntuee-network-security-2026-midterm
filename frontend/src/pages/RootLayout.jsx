@@ -45,11 +45,6 @@ export default function RootLayout() {
             </Link>
           </li>
           <li>
-            <Link to="/users" className={path === "/users" ? "active" : ""}>
-              Visitors
-            </Link>
-          </li>
-          <li>
             <Link to="/messages" className={path === "/messages" ? "active" : ""}>
               Messages
             </Link>
