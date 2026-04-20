@@ -2,6 +2,7 @@ import { prisma } from "../../../../adapters.js";
 
 const PUBLIC_USER_FIELDS = {
   username: true,
+  role: true,
   avatarUrl: true,
 };
 

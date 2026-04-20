@@ -8,6 +8,7 @@ const SAFE_USER_FIELDS = {
   id: true,
   username: true,
   email: true,
+  role: true,
   avatarUrl: true,
   createdAt: true,
 };
@@ -36,7 +37,7 @@ export async function register(req, res) {
 
   const passwordHash = await bcrypt.hash(password, 12);
   const user = await prisma.user.create({
-    data: { username: normalizedUsername, email: normalizedEmail, passwordHash },
+    data: { username: normalizedUsername, email: normalizedEmail, passwordHash, role: "user" },
     select: SAFE_USER_FIELDS,
   });
 
