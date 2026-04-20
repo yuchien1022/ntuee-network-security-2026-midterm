@@ -131,7 +131,7 @@ export default function Register() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="avatar">Avatar (jpg/png, max 5 MB)</label>
+            <label htmlFor="avatar">Avatar, Optional (jpg/png, max 5 MB)</label>
             <input
               id="avatar"
               type="file"
